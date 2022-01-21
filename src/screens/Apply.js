@@ -1,12 +1,15 @@
-import styled from "styled-components";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import styled from "styled-components";
+import Form from "../components/meet/Form";
 
 const Container = styled.div`
-  display: flex;
-  height: 100vh;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+  max-width: 800px;
+  width: 100%;
+  @media screen and (max-width: 900px) {
+    width: 90%;
+  }
+  margin: 50px;
 `;
 
 const Wrapper = styled.div`
@@ -19,7 +22,7 @@ const FormContainer = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  padding: 35px 40px 25px 40px;
+  padding: 35px 0px 25px 0px;
   margin-bottom: 10px;
   form {
     margin-top: 35px;
@@ -61,33 +64,37 @@ const Button = styled.button`
   width: 100%;
 `;
 
-export default function Login() {
+export default function Apply({ location }) {
   const { register, handleSubmit } = useForm({ mode: "onChange" });
 
-  const fetchLogin = async ({ user_name, user_pw }) => {
-    const ok = await fetch(`http://localhost:5000/login`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
+  const token = localStorage.getItem("TOKEN");
+
+  const fetchInMeet = async ({ form_reason }) => {
+    const ok = await fetch(`http://localhost:5000/inmeet`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      },
       body: JSON.stringify({
-        user_name,
-        user_pw,
+        meet_no: location.state.meet_no,
+        form_no: location.state.form_no,
+        form_reason,
       }),
     }).then(res => res.json());
     return ok;
   };
 
-  const onSubmitValid = async ({ user_name, user_pw }) => {
-    const { token, login } = await fetchLogin({ user_name, user_pw });
-    if (login === true) {
-      localStorage.setItem("TOKEN", token);
-      window.location.reload();
-    } else if (login === false) {
-      alert("로그인 실패");
+  const onSubmitValid = async ({ form_reason }) => {
+    const { inMeet } = await fetchInMeet({ form_reason });
+    if (inMeet === false) {
+      alert("이미 참가한 모임입니다.");
     }
   };
 
   return (
     <Container>
+      <h1 style={{ color: "#0095f6" }}>신청하기</h1>
       <Wrapper>
         <FormContainer>
           <form onSubmit={handleSubmit(onSubmitValid)}>
@@ -95,20 +102,12 @@ export default function Login() {
               ref={register({
                 required: "사용자 이름 넣으소",
               })}
-              name="user_name"
+              name="form_reason"
               type="text"
-              placeholder="Username"
-            />
-            <Input
-              ref={register({
-                required: "사용자 이름 넣으소",
-              })}
-              name="user_pw"
-              type="text"
-              placeholder="Password"
-            />
-            <Button type="submit" value="로그인">
-              로그인
+              placeholder="reason"
+            ></Input>
+            <Button type="submit" value="신청하기">
+              신청하기
             </Button>
           </form>
         </FormContainer>
