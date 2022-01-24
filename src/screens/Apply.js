@@ -1,3 +1,4 @@
+import { Button } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
@@ -18,30 +19,23 @@ const Wrapper = styled.div`
 `;
 
 const FormContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  padding: 35px 0px 25px 0px;
   margin-bottom: 10px;
   form {
     margin-top: 35px;
     width: 100%;
     display: flex;
-    justify-items: center;
-    flex-direction: column;
-    align-items: center;
+    justify-items: space-between;
   }
 `;
 
 const Input = styled.input`
-  width: 100%;
+  width: 70%;
   border-radius: 3px;
   padding: 7px;
   background-color: #fafafa;
   border: 0.5px solid
     ${props => (props.hasError ? "tomato" : props.theme.borderColor)};
-  margin-top: 10px;
+  margin-right: 10px;
   box-sizing: border-box;
 
   &::placeholder {
@@ -50,18 +44,6 @@ const Input = styled.input`
   & :focus {
     border-color: rgb(38, 38, 38);
   }
-`;
-
-const Button = styled.button`
-  border: none;
-  border-radius: 3px;
-  margin-top: 13px;
-  background-color: #0095f6;
-  color: white;
-  text-align: center;
-  padding: 8px 0px;
-  font-weight: 600;
-  width: 100%;
 `;
 
 export default function Apply({ location }) {
@@ -106,7 +88,7 @@ export default function Apply({ location }) {
               type="text"
               placeholder="reason"
             ></Input>
-            <Button type="submit" value="신청하기">
+            <Button type="submit" variant="contained">
               신청하기
             </Button>
           </form>

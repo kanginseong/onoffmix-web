@@ -59,14 +59,14 @@ export default function Form({
       >
         <FormContainer>
           <FormTitle>
-            <FormTitleShape>그룹 제목</FormTitleShape>
-            <FormTitleShape>그룹 인원</FormTitleShape>
-            <FormTitleShape>가능 인원</FormTitleShape>
-            <FormTitleShape>참가 형태</FormTitleShape>
-            <FormTitleShape>모집 시작</FormTitleShape>
-            <FormTitleShape>모집 끝</FormTitleShape>
-            <FormTitleShape>모임 시작</FormTitleShape>
-            <FormTitleShape>모임 끝</FormTitleShape>
+            <FormTitleShape>그룹명</FormTitleShape>
+            <FormTitleShape>그룹인원</FormTitleShape>
+            <FormTitleShape>가능인원</FormTitleShape>
+            <FormTitleShape>참가형태</FormTitleShape>
+            <FormTitleShape>모집시작</FormTitleShape>
+            <FormTitleShape>모집끝</FormTitleShape>
+            <FormTitleShape>모임시작</FormTitleShape>
+            <FormTitleShape>모임끝</FormTitleShape>
           </FormTitle>
           <FormContent>
             <FormTextShape>{form_title}</FormTextShape>

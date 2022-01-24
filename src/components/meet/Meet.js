@@ -62,9 +62,9 @@ export default function Meet({
       >
         <MeetContainer>
           <MeetTitle>
-            <MeetTitleShape>모임 제목</MeetTitleShape>
-            <MeetTitleShape>모임 내용</MeetTitleShape>
-            <MeetTitleShape>생성 날짜</MeetTitleShape>
+            <MeetTitleShape>모임명</MeetTitleShape>
+            <MeetTitleShape>모임내용</MeetTitleShape>
+            <MeetTitleShape>생성날짜</MeetTitleShape>
             <MeetTitleShape>신청자</MeetTitleShape>
             <MeetTitleShape>조회수</MeetTitleShape>
           </MeetTitle>
