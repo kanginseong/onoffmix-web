@@ -19,7 +19,8 @@ const ButtonContainer = styled.div`
 
 export default function Manage() {
   const [viewMeet, setViewMeet] = useState(true);
-  const [meet, setMeet] = useState([]);
+  const [regiMeet, setRegiMeet] = useState([]);
+  const [partMeet, setPartMeet] = useState([]);
 
   const token = localStorage.getItem("TOKEN");
 
@@ -33,9 +34,25 @@ export default function Manage() {
     })
       .then(res => res.json())
       .then(({ meet }) => {
-        setMeet(meet);
+        setRegiMeet(meet);
       });
   }, []);
+
+  useEffect(() => {
+    fetch(`http://localhost:5000/seepartlist`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      },
+    })
+      .then(res => res.json())
+      .then(({ partList }) => {
+        setPartMeet(partList);
+      });
+  }, []);
+
+  console.log(partMeet);
 
   return (
     <Container>
@@ -57,11 +74,9 @@ export default function Manage() {
         </Button>
       </ButtonContainer>
       <div>
-        {viewMeet ? (
-          meet?.map(meet => <Regi key={meet.meet_no} {...meet} />)
-        ) : (
-          <Part />
-        )}
+        {viewMeet
+          ? regiMeet?.map(meet => <Regi key={meet.meet_no} {...meet} />)
+          : partMeet?.map(meet => <Part key={meet.meet_no} {...meet} />)}
       </div>
     </Container>
   );

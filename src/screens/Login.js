@@ -52,11 +52,10 @@ const Input = styled.input`
 const Button = styled.button`
   border: none;
   border-radius: 3px;
-  margin-top: 13px;
   background-color: #0095f6;
   color: white;
   text-align: center;
-  padding: 8px 0px;
+  padding: 8px;
   font-weight: 600;
   width: 100%;
 `;
@@ -97,7 +96,7 @@ export default function Login() {
               })}
               name="user_name"
               type="text"
-              placeholder="Username"
+              placeholder="이름"
             />
             <Input
               ref={register({
@@ -105,17 +104,26 @@ export default function Login() {
               })}
               name="user_pw"
               type="text"
-              placeholder="Password"
+              placeholder="비밀번호"
             />
-            <Button type="submit" value="로그인">
+            <Button
+              style={{ marginRight: "20px", width: "130px", marginTop: "15px" }}
+              type="submit"
+              value="로그인"
+            >
               로그인
             </Button>
           </form>
           <Link
             to={"/signup"}
-            style={{ textDecoration: "none", color: "black", width: "270px" }}
+            style={{ textDecoration: "none", color: "black" }}
           >
-            <Button value="회원가입">회원가입</Button>
+            <Button
+              style={{ marginRight: "20px", width: "130px", marginTop: "10px" }}
+              value="회원가입"
+            >
+              회원가입
+            </Button>
           </Link>
         </FormContainer>
       </Wrapper>
