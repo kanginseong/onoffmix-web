@@ -1,8 +1,6 @@
 import { Button } from "@mui/material";
-import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
-import Form from "../components/meet/Form";
 
 const Container = styled.div`
   max-width: 800px;
@@ -71,6 +69,9 @@ export default function Apply({ location }) {
     const { inMeet } = await fetchInMeet({ form_reason });
     if (inMeet === false) {
       alert("이미 참가한 모임입니다.");
+    } else {
+      alert("모임에 참가 완료했습니다.");
+      window.location.replace("/");
     }
   };
 

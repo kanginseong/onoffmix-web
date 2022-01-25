@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
   display: flex;
@@ -110,6 +111,12 @@ export default function Login() {
               로그인
             </Button>
           </form>
+          <Link
+            to={"/signup"}
+            style={{ textDecoration: "none", color: "black", width: "270px" }}
+          >
+            <Button value="회원가입">회원가입</Button>
+          </Link>
         </FormContainer>
       </Wrapper>
     </Container>

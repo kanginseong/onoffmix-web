@@ -33,12 +33,13 @@ const InputTitle = styled.div`
 `;
 
 const Input = styled.input`
-  width: 85%;
+  width: 80%;
   border-radius: 3px;
   padding: 10px;
   background-color: #fafafa;
   border: 0.5px solid;
   box-sizing: border-box;
+  margin-right: 30px;
 
   &::placeholder {
     font-size: 14px;
@@ -51,27 +52,35 @@ const Input = styled.input`
 export default function Open() {
   const { register, handleSubmit } = useForm({ mode: "onChange" });
 
-  const [data, setData] = useState([0]);
+  const token = localStorage.getItem("TOKEN");
 
-  console.log(data);
+  const [group, setGroup] = useState([]);
 
-  const [formList, setFormList] = useState([0]);
-  const [delList, setDelList] = useState([0]);
-
-  const onAddComponents = () => {
-    let countArr = [...formList];
-    let counter = countArr.slice(-1)[0];
-    counter += 1;
-    countArr.push(counter);
-    setFormList(countArr);
+  const fetchCreateMeet = async ({ meet_title, meet_content }) => {
+    const ok = await fetch(`http://localhost:5000/createmeet`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      },
+      body: JSON.stringify({
+        meet_title,
+        meet_content,
+        group,
+      }),
+    }).then(res => res.json());
+    console.log(ok);
+    return ok;
   };
 
-  const deleteComponents = () => {
-    setDelList(formList.length - 1);
-  };
-
-  const onSubmitValid = async data => {
-    console.log(data);
+  const onSubmitValid = async ({ meet_title, meet_content }) => {
+    const { createMeet } = await fetchCreateMeet({ meet_title, meet_content });
+    if (createMeet === false) {
+      alert("다시 만들어 주세요.");
+    } else {
+      alert("방이 만들어 졌습니다.");
+      window.location.replace("/");
+    }
   };
 
   return (
@@ -103,21 +112,10 @@ export default function Open() {
           </Button>
         </form>
       </FormContainer>
-      <Button
-        onClick={onAddComponents}
-        variant="contained"
-        style={{ marginTop: "20px" }}
-      >
+      {/* <Button type="submit" variant="contained" style={{ marginTop: "20px" }}>
         그룹 추가하기
-      </Button>
-      <Button
-        onClick={deleteComponents}
-        variant="contained"
-        style={{ marginTop: "20px", marginLeft: "20px" }}
-      >
-        그룹 삭제하기
-      </Button>
-      <FormInfo addList={formList} setData={setData} />
+      </Button> */}
+      <FormInfo setGroup={setGroup} group={group} />
     </Container>
   );
 }

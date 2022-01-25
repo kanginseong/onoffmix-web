@@ -47,84 +47,81 @@ export default function FormInfo(props) {
   const { register, handleSubmit } = useForm({ mode: "onChange" });
 
   const onSubmitValid = data => {
-    props.setData(data);
+    props.setGroup([data, ...props.group]);
   };
 
   return (
     <div>
-      {props.addList &&
-        props.addList.map((item, i) => (
-          <FormWrapper key={i}>
-            <form onSubmit={handleSubmit(onSubmitValid)}>
-              <InputContainer>
-                <InputTitle>그룹명</InputTitle>
-                <Input
-                  ref={register({ required: "" })}
-                  name="form_title"
-                  type="text"
-                  placeholder="그룹명을 입력해주세요"
-                />
-              </InputContainer>
-              <InputContainer>
-                <InputTitle>그룹인원</InputTitle>
-                <Input
-                  ref={register({ required: "" })}
-                  name="form_total"
-                  type="text"
-                  placeholder="그룹인원을 입력해주세요"
-                />
-              </InputContainer>
-              <InputContainer>
-                <InputTitle>참가형태</InputTitle>
-                <Input
-                  ref={register({ required: "" })}
-                  name="form_admission"
-                  type="text"
-                  placeholder="참가형태를 입력해주세요"
-                />
-              </InputContainer>
-              <InputContainer>
-                <InputTitle>모집시작</InputTitle>
-                <Input
-                  ref={register({ required: "" })}
-                  name="form_meet_start"
-                  type="text"
-                  placeholder="모집시작 시간을 입력해주세요"
-                />
-              </InputContainer>
-              <InputContainer>
-                <InputTitle>모집끝</InputTitle>
-                <Input
-                  ref={register({ required: "" })}
-                  name="form_meet_end"
-                  type="text"
-                  placeholder="모집끝 시간을 입력해주세요"
-                />
-              </InputContainer>
-              <InputContainer>
-                <InputTitle>모임시작</InputTitle>
-                <Input
-                  ref={register({ required: "" })}
-                  name="form_apply_start"
-                  type="text"
-                  placeholder="모임시작 시간을 입력해주세요"
-                />
-              </InputContainer>
-              <InputContainer>
-                <InputTitle>모임끝</InputTitle>
-                <Input
-                  ref={register({ required: "" })}
-                  name="form_apply_end"
-                  type="text"
-                  placeholder="모임끝 시간을 입력해주세요"
-                />
-              </InputContainer>
-              <Button type="submit" variant="contained">
-                그룹 설정
-              </Button>
-            </form>
-          </FormWrapper>
-        ))}
+      <FormWrapper>
+        <form onSubmit={handleSubmit(onSubmitValid)}>
+          <InputContainer>
+            <InputTitle>그룹명</InputTitle>
+            <Input
+              ref={register({ required: "" })}
+              name="form_title"
+              type="text"
+              placeholder="그룹명을 입력해주세요"
+            />
+          </InputContainer>
+          <InputContainer>
+            <InputTitle>그룹인원</InputTitle>
+            <Input
+              ref={register({ required: "" })}
+              name="form_total"
+              type="number"
+              placeholder="그룹인원을 입력해주세요"
+            />
+          </InputContainer>
+          <InputContainer>
+            <InputTitle>참가형태</InputTitle>
+            <Input
+              ref={register({ required: "" })}
+              name="form_admission"
+              type="text"
+              placeholder="참가형태를 입력해주세요"
+            />
+          </InputContainer>
+          <InputContainer>
+            <InputTitle>모집시작</InputTitle>
+            <Input
+              ref={register({ required: "" })}
+              name="form_meet_start"
+              type="text"
+              placeholder="모집시작 시간을 입력해주세요"
+            />
+          </InputContainer>
+          <InputContainer>
+            <InputTitle>모집끝</InputTitle>
+            <Input
+              ref={register({ required: "" })}
+              name="form_meet_end"
+              type="text"
+              placeholder="모집끝 시간을 입력해주세요"
+            />
+          </InputContainer>
+          <InputContainer>
+            <InputTitle>모임시작</InputTitle>
+            <Input
+              ref={register({ required: "" })}
+              name="form_apply_start"
+              type="text"
+              placeholder="모임시작 시간을 입력해주세요"
+            />
+          </InputContainer>
+          <InputContainer>
+            <InputTitle>모임끝</InputTitle>
+            <Input
+              ref={register({ required: "" })}
+              name="form_apply_end"
+              type="text"
+              placeholder="모임끝 시간을 입력해주세요"
+            />
+          </InputContainer>
+          <Button type="submit" variant="contained">
+            그룹 설정
+          </Button>
+        </form>
+      </FormWrapper>
     </div>
   );
 }

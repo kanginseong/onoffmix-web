@@ -20,6 +20,11 @@ const ButtonContainer = styled.div`
 export default function Home() {
   const [seeMeet, setSeeMeet] = useState();
 
+  const logOut = () => {
+    localStorage.removeItem("TOKEN");
+    window.location.reload();
+  };
+
   useEffect(() => {
     fetch(`http://localhost:5000/seemeet`)
       .then(res => res.json())
@@ -48,6 +53,13 @@ export default function Home() {
             모임 관리하기
           </Button>
         </Link>
+        <Button
+          variant="contained"
+          style={{ marginRight: "20px", width: "130px" }}
+          onClick={logOut}
+        >
+          로그아웃
+        </Button>
       </ButtonContainer>
       {seeMeet?.map(meet => (
         <Meet key={meet.meet_no} {...meet} />
