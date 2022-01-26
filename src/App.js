@@ -8,6 +8,7 @@ import Open from "./screens/Open";
 import Manage from "./screens/Manage";
 import GroupRegi from "./screens/GroupRegi";
 import MemberRegi from "./screens/MemberRegi";
+import Reopen from "./screens/Reopen";
 
 export const isLoggedIn = localStorage.getItem("TOKEN");
 
@@ -27,6 +28,7 @@ function App() {
           <Route path="/open">
             <Open />
           </Route>
+          <Route path="/reopen" render={props => <Reopen {...props} />}></Route>
           <Switch>
             <Route path="/manage" exact>
               <Manage />

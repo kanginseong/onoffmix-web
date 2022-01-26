@@ -5,7 +5,7 @@ import styled from "styled-components";
 const PartContainer = styled.div`
   display: flex;
   align-items: center;
-  margin: 25px 0px 5px 0px;
+  margin: 20px 0px 10px 0px;
   border-radius: 4px;
   border: 1px solid ${props => props.theme.borderColor};
 `;
@@ -43,17 +43,30 @@ export default function Part({
   meet_view,
   user_no,
 }) {
+  const token = localStorage.getItem("TOKEN");
+
+  const fetchDeletePartList = () => {
+    fetch("http://localhost:5000/deletepartlist", {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      },
+      body: JSON.stringify({
+        meet_no,
+      }),
+    })
+      .then(res => res.json())
+      .then(({ deletePartList }) => {
+        if (deletePartList === true) {
+          alert("모임에 나갔습니다.");
+          window.location.reload();
+        }
+      });
+  };
+
   return (
     <div>
-      {/* <Link
-        to={{
-          pathname: "/manage/partgroup",
-          state: {
-            meet_no,
-          },
-        }}
-        style={{ textDecoration: "none", color: "black" }}
-      > */}
       <PartContainer>
         <PartTitle>
           <PartTitleShape>모임명</PartTitleShape>
@@ -69,10 +82,10 @@ export default function Part({
       <Button
         variant="contained"
         style={{ marginRight: "20px", width: "130px" }}
+        onClick={fetchDeletePartList}
       >
         모임 나가기
       </Button>
-      {/* </Link> */}
     </div>
   );
 }

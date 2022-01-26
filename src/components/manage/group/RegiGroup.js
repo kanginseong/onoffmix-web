@@ -50,6 +50,7 @@ export default function RegiGroup({
         to={{
           pathname: "/manage/regigroup/member",
           state: {
+            meet_no,
             form_no,
           },
         }}

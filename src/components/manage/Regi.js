@@ -1,10 +1,11 @@
+import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const RegiContainer = styled.div`
   display: flex;
   align-items: center;
-  margin: 20px 0px;
+  margin: 20px 0px 10px 0px;
   border-radius: 4px;
   border: 1px solid ${props => props.theme.borderColor};
 `;
@@ -64,6 +65,22 @@ export default function Regi({
             <RegiTextShape>{meet_created}</RegiTextShape>
           </RegiContent>
         </RegiContainer>
+      </Link>
+      <Link
+        to={{
+          pathname: "/reopen",
+          state: {
+            meet_no,
+          },
+        }}
+        style={{ textDecoration: "none" }}
+      >
+        <Button
+          variant="contained"
+          style={{ marginRight: "20px", width: "130px" }}
+        >
+          모임 수정하기
+        </Button>
       </Link>
     </div>
   );

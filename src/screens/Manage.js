@@ -52,8 +52,6 @@ export default function Manage() {
       });
   }, []);
 
-  console.log(partMeet);
-
   return (
     <Container>
       <h1 style={{ color: "#0095f6" }}>모임 관리하기</h1>
